@@ -37,15 +37,28 @@ const Dashboard = () => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col xs={12} md={8}>
+      <Container className="bg-secondary bg-gradient pb-3 pt-0">
+        <Row className="d-flex justify-content-center ">
+          <Col xs={12} md={6}>
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="fileUpload">
-                <Form.Label>Upload File</Form.Label>
-                <Form.Control type="file" onChange={handleFileChange} required />
-              </Form.Group>
-              <Button type="submit">Upload</Button>
+              <Row className="mt-5 pe-0 ">
+                <Col xs={11} className="pe-0">
+                  <Form.Group controlId="fileUpload">
+                    <Row>
+                      <Col xs={2} className="pe-0 pt-1">
+                        <Form.Label>Upload File</Form.Label>
+                      </Col>
+                      <Col xs={10} className="ps-0">
+                        <Form.Control type="file" onChange={handleFileChange} required />
+                      </Col>
+                    </Row>
+                  </Form.Group>
+                </Col>
+                <Col xs={1} className="mt-0 ms-0">
+                  <Button type="submit">Upload</Button>
+                </Col>
+
+              </Row>
             </Form>
           </Col>
         </Row>

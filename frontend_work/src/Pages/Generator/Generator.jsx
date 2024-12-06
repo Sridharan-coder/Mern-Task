@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
@@ -51,12 +50,12 @@ const Generator = () => {
     event.preventDefault();
     const form = event.target.closest("form");
     console.log("--->", form[4].value);
-    
+
 
     const data = new FormData(form);
     const formValues = Object.fromEntries(data.entries());
-    
-    
+
+
     const doc = new jsPDF();
     Object.entries(formValues).forEach(([key, value], index) => {
       doc.text(20, 20 + index * 10, `${key}: ${value}`);
@@ -95,7 +94,7 @@ const Generator = () => {
 
     const data = new FormData(form);
     const formValues = Object.fromEntries(data.entries());
- 
+
 
 
     const ws = XLSX.utils.json_to_sheet([formValues]);
@@ -126,69 +125,81 @@ const Generator = () => {
   };
 
 
-
-  const handleSubmit = () => {
-
-  }
-
-
-
   return (
-    <Form style={{ marginTop: 50 }} className="w-50 mx-auto" >
-      <Form.Group controlId="eventName">
-        <FloatingLabel className="mb-3" label="Event Name">
-          <Form.Control name="eventName" type="text" required />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group controlId="name">
-        <FloatingLabel className="mb-3" label="Name">
-          <Form.Control name="name" type="text" required />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group controlId="phoneNumber">
-        <FloatingLabel className="mb-3" label="Phone Number">
-          <Form.Control name="phoneNumber" type="number" required min={6000000000} max={9999999999} />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group controlId="email">
-        <FloatingLabel className="mb-3" label="Email">
-          <Form.Control name="email" type="email" required />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group controlId="location">
-        <FloatingLabel className="mb-3" label="Location">
-          <Form.Select name="location" required>
-            {districts.map((dis, index) => (
-              <option key={dis + index} value={`${dis.coordinate.lat},${dis.coordinate.lng}`}>
-                {dis.city}
-              </option>
-            ))}
-          </Form.Select>
-        </FloatingLabel>
-      </Form.Group>
-      {/* <Form.Group controlId="eventDate">
-        <FloatingLabel className="mb-3" label="Event Date">
-          <Form.Control name="date" type="date" min={new Date().toISOString().split("T")[0]} defaultValue={new Date().toISOString().split("T")[0]} required onChange={(e) => setFlagDate(e.target.value)} />
-        </FloatingLabel>
-      </Form.Group> */}
-      <Form.Group controlId="eventDateAndTime">
-        <FloatingLabel className="mb-3" label="Event Date & Time">
-          <Form.Control name="time" type="datetime-local" min={new Date().toISOString().substring(0, 16)} defaultValue={new Date().toISOString().substring(0, 16)} required />
-        </FloatingLabel>
-      </Form.Group>
-      <Row className="px-2">
-        <Col xs={6}>
-          <Button variant="dark" type="submit" onClick={handleGeneratePDF}>
-            Generate PDF
-          </Button>
-        </Col>
-        <Col xs={6}>
-          <Button variant="dark" type="submit" onClick={handleGenerateExcel}>
-            Generate Excel
-          </Button>
-        </Col>
+    <>
+      <Row className="bg-secondary bg-gradient" style={{ height: "92vh" }}>
+        <Row style={{ height: "72vh" }}>
+
+          <Col></Col>
+          <Col className="bg-dark bg-gradient mt-5 rounded">
+            <Row className="ms-1 pb-2 me-0 d-flex justify-content-center h2  bg-dark bg-gradient">
+              Event Detail
+            </Row>
+            <Row>
+              <Form style={{ marginTop: 50 }} className="pt-0 mt-0 ps-4" >
+                <Form.Group controlId="eventName">
+                  <FloatingLabel className="mb-3" label="Event Name">
+                    <Form.Control name="eventName" type="text" required />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group controlId="name">
+                  <FloatingLabel className="mb-3" label="Name">
+                    <Form.Control name="name" type="text" required />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group controlId="phoneNumber">
+                  <FloatingLabel className="mb-3" label="Phone Number">
+                    <Form.Control name="phoneNumber" type="number" required min={6000000000} max={9999999999} />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group controlId="email">
+                  <FloatingLabel className="mb-3" label="Email">
+                    <Form.Control name="email" type="email" required />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group controlId="location">
+                  <FloatingLabel className="mb-3" label="Location">
+                    <Form.Select name="location" required>
+                      {districts.map((dis, index) => (
+                        <option key={dis + index} value={`${dis.coordinate.lat},${dis.coordinate.lng}`}>
+                          {dis.city}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Group>
+                {/* <Form.Group controlId="eventDate">
+<FloatingLabel className="mb-3" label="Event Date">
+  <Form.Control name="date" type="date" min={new Date().toISOString().split("T")[0]} defaultValue={new Date().toISOString().split("T")[0]} required onChange={(e) => setFlagDate(e.target.value)} />
+</FloatingLabel>
+</Form.Group> */}
+                <Form.Group controlId="eventDateAndTime">
+                  <FloatingLabel className="mb-3" label="Event Date & Time">
+                    <Form.Control name="time" type="datetime-local" min={new Date().toISOString().substring(0, 16)} defaultValue={new Date().toISOString().substring(0, 16)} required />
+                  </FloatingLabel>
+                </Form.Group>
+                <Row className="px-2 pb-3 ms-auto">
+                  <Col xs={6}>
+                    <Button variant="dark" type="submit" className="bg-secondary bg-gradient" onClick={handleGeneratePDF}>
+                      Generate PDF
+                    </Button>
+                  </Col>
+                  <Col xs={6} className="d-flex justify-content-end">
+                    <Button variant="dark" className="bg-secondary bg-gradient" type="submit" onClick={handleGenerateExcel}>
+                      Generate Excel
+                    </Button>
+                  </Col>
+                </Row>
+              </Form>
+
+            </Row>
+          </Col>
+          <Col></Col>
+        </Row>
+        
       </Row>
-    </Form>
+
+    </>
   );
 };
 

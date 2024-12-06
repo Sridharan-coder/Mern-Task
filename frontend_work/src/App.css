@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
-@import "rsuite/dist/rsuite.css";
 
 .row{
-  margin-right: (0.5*var(--bs-gutter-x)) !important;
+  /* margin-right: (0.5*var(--bs-gutter-x)) !important; */
+  margin-right: 0px !important;
+  margin-left: 0px !important;
 }
 
 .slick-prev,
@@ -18,7 +19,7 @@
 .slick-prev::before,
 .slick-next::before {
   font-size: 70px !important;
-  color: rgb(0, 0, 0) !important;
+  color: rgba(0, 0, 0, 0.452) !important;
 }
 
 .slick-prev {
@@ -29,12 +30,20 @@
   right: -40px !important;
 }
 
-/* 
-#phoneNumber::-webkit-outer-spin-button,
-#phoneNUmber::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-} */
+
+.nav-tabs .nav-link.active{
+  background-color: rgb(140, 142, 133) !important;
+  color: rgb(58, 53, 53) !important ;
+}
+
+.nav-link{
+  color: whitesmoke !important;
+}
+
+.logoutbtn .btn{
+  color: whitesmoke !important;
+}
+
 
 #phoneNumber::-webkit-outer-spin-button,
 #phoneNumber::-webkit-inner-spin-button {

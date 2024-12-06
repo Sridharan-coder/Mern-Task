@@ -3,11 +3,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import privateRoute from "../Rotings/PrivateRoutes/PrivateRoutes";
 import vr46 from "../../Assets/vr46.jpg";
 import {
-  Nav,
-  Navbar,
-  Container,
-  NavDropdown,
-  Button,
   Tab,
   Tabs,
   Col,
@@ -22,55 +17,60 @@ const PrivateRouting = () => {
   useEffect(() => {
     navigate(navigatePage);
 
-    //// eslint-disable-next-line
+    // eslint-disable-next-line
   }, [navigatePage]);
   return (
     <>
-      <Row>
-        <Col xs={11}>
+      <Row className="navBar mt-2">
+        <Col xs={10} className="text-white ms-0 pe-0">
           <Tabs
             defaultActiveKey="/dashboard"
             id="uncontrolled-tab-example"
-            className="mb-3"
+            className=" bg-dark bg-gradient"
             onSelect={(k) => setNavigatepage(k)}
+            fill
           >
-            <Tab eventKey="/dashboard" title="Dashboard"></Tab>
+            <Tab eventKey="/dashboard" title="Dashboard" ></Tab>
             <Tab eventKey="/generator" title="Generator"></Tab>
             <Tab eventKey="/corasalImage" title="Image"></Tab>
-            <Tab eventKey="/visualize" title="Visualize"></Tab>
+            <Tab eventKey="/visualize" title="Visualize" ></Tab>
           </Tabs>
         </Col>
-        <Col xs={1}>
+        <Col  xs={2} className=" bg-dark bg-gradient text-white d-flex justify-content-center logoutbtn">
           <Logout />
         </Col>
       </Row>
-      <Routes>
-        {privateRoute.map((route, index) => {
-          let Component = route.component;
-          return (
-            <Route
-              key={`route-${index}`}
-              path={route.path}
-              element={
-                <Suspense
-                  fallback={
-                    <>
-                      <img
-                        src={vr46}
-                        alt="vr46"
-                        width={"100%"}
-                        height={"100%"}
-                      />
-                    </>
-                  }
-                >
-                  <Component />
-                </Suspense>
-              }
-            />
-          );
-        })}
-      </Routes>
+      <Row className="UIContent d-flex justify-content-center bg-secondary bg-gradient mb-2 text-white" style={{height:"93vh"}} >
+
+        <Routes>
+          {privateRoute.map((route, index) => {
+            let Component = route.component;
+            return (
+              <Route
+                key={`route-${index}`}
+                path={route.path}
+                element={
+                  <Suspense
+                    fallback={
+                      <>
+                        <img
+                          src={vr46}
+                          alt="vr46"
+                          width={"100%"}
+                          height={"100%"}
+                        />
+                      </>
+                    }
+                  >
+                    <Component />
+                  </Suspense>
+                }
+              />
+            );
+          })}
+        </Routes>
+
+      </Row>
     </>
   );
 };

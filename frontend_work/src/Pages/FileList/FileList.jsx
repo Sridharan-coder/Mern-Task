@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  Badge,
   Button,
   Col,
   Form,
@@ -19,37 +18,10 @@ const FileList = ({ file }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalChecker,setisModalChecker]=useState("");
 
-  //   const handleDownload = (file) => {
-  //     const path = file.filesPath.split("\\");
-  //     const fileName = path[path.length - 1];
-
-  //   };
-
   const fetchUsers = () => {
     axios
       .get(
-        `http://localhost:3320/readAll/${valueCount}`
-        // ,
-        // {
-        //     mode: 'no-cors',
-        // }
-        // {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Access-Control-Allow-Methods': 'GET'
-        // }
-        // {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Content-Type': 'application/json',
-        //     withCredentials: true,
-        //     mode: 'no-cors',
-        // }
-        // {
-        //     headers: {
-        //         "Content-Type": "application/x-www-form-urlencoded",
-        //         "Access-Control-Allow-Origin": "*",
-        //     },
-        // }
-      )
+        `http://localhost:3320/readAll/${valueCount}`)
       .then((response) => {
         const responseData = [...response.data.files];
         if (responseData.length < 11) {
@@ -133,36 +105,36 @@ const FileList = ({ file }) => {
   console.log(files.length < 10);
   return (
     <>
-      <Row style={{ marginTop: 40 }}>
-        <Col xs={1}> </Col>
-        <Col xs={10}>
+      <Row className="bg-secondary bg-gradient mt-1" style={{height:"82vh"}}>
+        <Col xs={2}> </Col>
+        <Col xs={8}>
           {files.length ? (
             <>
-              <Table hover bordered>
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>File Name</th>
-                    <th colSpan={2}>Actions</th>
+              <Table hover  className="bg-dark bg-gradient">
+                <thead className="bg-dark bg-gradient">
+                  <tr >
+                    <th className=" bg-dark bg-gradient text-white">Id</th>
+                    <th className=" bg-dark bg-gradient text-white">File Name</th>
+                    <th className=" bg-dark bg-gradient text-white">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-dark bg-gradient">
                   {files.map((file, index) => (
-                    <tr key={index}>
-                      <td>{(valueCount * 10) + (index + 1)}</td>
-                      <td>{file.fileName}</td>
-                      <td>
+                    <tr key={index} >
+                      <td className=" bg-secondary bg-gradient text-white">{(valueCount * 10) + (index + 1)}</td>
+                      <td className=" bg-secondary bg-gradient text-white">{file.fileName}</td>
+                      <td className=" bg-secondary bg-gradient text-white">
                         <Button
                           onClick={() => handleDownload(file)}
                           variant="primary"
                         >
                           Download
                         </Button>
-                      </td>
-                      <td>
+
                         <Button
                           onClick={() => {setIsModalOpen(true); setisModalChecker(file.uid)}}
                           variant="primary"
+                          className="ms-4"
                         >
                           Share
                         </Button>
@@ -216,8 +188,6 @@ const FileList = ({ file }) => {
 
 
 
-
-
                     </tr>
                   ))}
                 </tbody>
@@ -226,16 +196,18 @@ const FileList = ({ file }) => {
                 <Button
                   onClick={() => setValueCount(valueCount - 1)}
                   disabled={valueCount <= 0}
+                  variant="success"
                 >
                   Previous
                 </Button>
-                <Pagination className="ms-auto paginationCount primary">
+                <Pagination className="ms-auto paginationCount primary text-white">
                   {valueCount + 1}
                 </Pagination>
                 <Button
                   onClick={() => setValueCount(valueCount + 1)}
                   disabled={isNextData}
                   className="ms-auto"
+                  variant="warning"
                 >
                   Next
                 </Button>
@@ -245,7 +217,7 @@ const FileList = ({ file }) => {
             ""
           )}
         </Col>
-        <Col xs={1}> </Col>
+        <Col xs={2}> </Col>
       </Row >
 
 

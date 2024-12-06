@@ -1,12 +1,10 @@
 
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import { googleLogout } from "@react-oauth/google";
 
 import { jwtDecode } from "jwt-decode"
 import { useDispatch } from "react-redux";
-import { logindetails, logoutdetails } from "../../Redux/Action_Create/ActionCreate"
+import { logindetails} from "../../Redux/Action_Create/ActionCreate"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -20,7 +18,8 @@ const Login = () => {
 
         // login()
     }
-
+    
+    // eslint-disable-next-line
     const login = useGoogleLogin({
         onSuccess: tokenResponse => {
             console.log("<----------", tokenResponse);
